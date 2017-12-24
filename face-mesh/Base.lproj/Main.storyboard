@@ -145,15 +145,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuP-8R-4B0">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuP-8R-4B0">
                                                     <rect key="frame" x="164" y="6" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Export"/>
                                                     <connections>
                                                         <action selector="onExportTap:" destination="ZqO-qc-PtD" eventType="touchUpInside" id="j9z-gy-enQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UuP-8R-4B0" firstAttribute="centerY" secondItem="KDa-Au-U9G" secondAttribute="centerY" id="XP0-Z9-vKN"/>
+                                                <constraint firstItem="UuP-8R-4B0" firstAttribute="centerX" secondItem="KDa-Au-U9G" secondAttribute="centerX" id="x7p-1O-CJy"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
