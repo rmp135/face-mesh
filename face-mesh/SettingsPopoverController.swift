@@ -17,9 +17,13 @@ class SettingsPopoverController: UITableViewController {
     @IBOutlet weak var backgroundSwitch: UISwitch!
     @IBOutlet weak var wireframeSwitch: UISwitch!
     
+    @IBAction func onExportTap(_ sender: UIButton) {
+        self.dismiss(animated: false, completion: nil)
+        cameraDelegate!.exportFaceMap()
+    }
     override var preferredContentSize: CGSize {
         get {
-            return CGSize(width: super.preferredContentSize.width, height: 135)
+            return CGSize(width: super.preferredContentSize.width, height: 180)
         }
         set { super.preferredContentSize = newValue }
     }

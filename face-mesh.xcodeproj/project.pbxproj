@@ -15,6 +15,8 @@
 		94095B241FEFCE0100E53570 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94095B221FEFCE0100E53570 /* LaunchScreen.storyboard */; };
 		94095B2C1FEFD1CC00E53570 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B2B1FEFD1CC00E53570 /* Mask.swift */; };
 		94095B2E1FEFD6E600E53570 /* SettingsPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */; };
+		94095B371FF02B5400E53570 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B361FF02B5400E53570 /* Utilities.swift */; };
+		94095B391FF031AB00E53570 /* Template.txt in Resources */ = {isa = PBXBuildFile; fileRef = 94095B381FF031AB00E53570 /* Template.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		94095B251FEFCE0100E53570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94095B2B1FEFD1CC00E53570 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverController.swift; sourceTree = "<group>"; };
+		94095B361FF02B5400E53570 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		94095B381FF031AB00E53570 /* Template.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Template.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				94095B221FEFCE0100E53570 /* LaunchScreen.storyboard */,
 				94095B251FEFCE0100E53570 /* Info.plist */,
 				94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */,
+				94095B361FF02B5400E53570 /* Utilities.swift */,
+				94095B381FF031AB00E53570 /* Template.txt */,
 			);
 			path = "face-mesh";
 			sourceTree = "<group>";
@@ -133,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94095B1A1FEFCE0100E53570 /* art.scnassets in Resources */,
+				94095B391FF031AB00E53570 /* Template.txt in Resources */,
 				94095B241FEFCE0100E53570 /* LaunchScreen.storyboard in Resources */,
 				94095B211FEFCE0100E53570 /* Assets.xcassets in Resources */,
 				94095B1F1FEFCE0100E53570 /* Main.storyboard in Resources */,
@@ -149,6 +156,7 @@
 				94095B1C1FEFCE0100E53570 /* ViewController.swift in Sources */,
 				94095B181FEFCE0100E53570 /* AppDelegate.swift in Sources */,
 				94095B2E1FEFD6E600E53570 /* SettingsPopoverController.swift in Sources */,
+				94095B371FF02B5400E53570 /* Utilities.swift in Sources */,
 				94095B2C1FEFD1CC00E53570 /* Mask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

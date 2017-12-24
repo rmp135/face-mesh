@@ -12,10 +12,13 @@ import ARKit
 
 protocol CameraDelegate: class {
     var isCameraEnabled: Bool { get set }
+    func exportFaceMap()
 }
 
 class ViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate, UIPopoverPresentationControllerDelegate, CameraDelegate {
 
+    var utilities = Utilities()
+    
     var isCameraEnabled: Bool = true {
         didSet {
             if isCameraEnabled {
@@ -49,6 +52,7 @@ class ViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate, UI
             node.addChildNode(maskNode)
             self.settingsBtn.isEnabled = true
         }
+        
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
@@ -131,11 +135,26 @@ class ViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate, UI
             popController.sourceRect = button.bounds
             
             popoverController.modalPresentationStyle = .popover
-            //popoverController.popoverPresentationController!.delegate = self
         }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
+    }
+    
+    func exportFaceMap() {
+        guard let a = session.currentFrame?.anchors[0] as? ARFaceAnchor else { return }
+        
+        let toprint = utilities.exportToCollada(geometry: a.geometry)
+        
+        let file = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("face.dae")
+        do {
+            try toprint.write(to: file!, atomically: true, encoding: String.Encoding.utf8)
+        } catch  {
+            
+        }
+        let vc = UIActivityViewController(activityItems: [file as Any], applicationActivities: [])
+        present(vc, animated: true, completion: nil)
+        
     }
 }
