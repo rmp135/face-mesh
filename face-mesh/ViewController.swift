@@ -10,33 +10,82 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+protocol CameraDelegate: class {
+    var isCameraEnabled: Bool { get set }
+}
 
+class ViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate, UIPopoverPresentationControllerDelegate, CameraDelegate {
+
+    var isCameraEnabled: Bool = true {
+        didSet {
+            if isCameraEnabled {
+                sceneView.scene.background.contents = cameraSource
+            } else {
+                cameraSource = sceneView.scene.background.contents
+                sceneView.scene.background.contents = UIColor.black
+            }
+        }
+    }
+    @IBOutlet weak var settingsBtn: UIButton!
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    var session: ARSession {
+        return sceneView.session
+    }
+    
+    var faceNode: Mask?
+    
+    var cameraSource: Any? // When setting the camera to black, we have to store the original source.
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        let mask = ARSCNFaceGeometry(device: sceneView.device!)
+        let maskNode = Mask(geometry: mask!)
+        faceNode = maskNode
+        DispatchQueue.main.async {
+            for child in node.childNodes {
+                child.removeFromParentNode()
+            }
+            node.addChildNode(maskNode)
+            self.settingsBtn.isEnabled = true
+        }
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let faceAnchor = anchor as? ARFaceAnchor else { return }
+        faceNode?.update(withFaceAnchor: faceAnchor)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
+
         sceneView.delegate = self
-        
+        sceneView.session.delegate = self
+
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+
+        cameraSource = sceneView.scene.background.contents
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        resetTracking()
+    }
+    
+    func resetTracking() {
+        guard ARFaceTrackingConfiguration.isSupported else { return }
+        let configuration = ARFaceTrackingConfiguration()
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
+        session.pause()
+        
         let configuration = ARWorldTrackingConfiguration()
 
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
@@ -52,16 +101,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    // MARK: - ARSCNViewDelegate
-    
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -74,7 +113,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        DispatchQueue.main.async {
+            self.resetTracking()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "settingsPop" {
+            let popoverController = segue.destination as! SettingsPopoverController
+            popoverController.maskDelegate = faceNode
+            popoverController.cameraDelegate = self
+            
+            guard let popController = segue.destination.popoverPresentationController, let button = sender as? UIButton else { return }
+            
+            popController.delegate = self
+            popController.sourceRect = button.bounds
+            
+            popoverController.modalPresentationStyle = .popover
+            //popoverController.popoverPresentationController!.delegate = self
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 }
