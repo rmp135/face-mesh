@@ -11,7 +11,7 @@ import ARKit
 
 class Utilities {
     func exportToCollada(geometry: ARFaceGeometry) -> String {
-        let verticesText = geometry.vertices.map { vertex in String(vertex.x) + " " + String(vertex.y) + " " + String(vertex.z) }.joined(separator: "")
+        let verticesText = geometry.vertices.map { vertex in String(vertex.x) + " " + String(vertex.y) + " " + String(vertex.z) }.joined(separator: " ")
         
         var templateText = ""
         
