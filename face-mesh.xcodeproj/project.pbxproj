@@ -16,7 +16,6 @@
 		94095B2C1FEFD1CC00E53570 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B2B1FEFD1CC00E53570 /* Mask.swift */; };
 		94095B2E1FEFD6E600E53570 /* SettingsPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */; };
 		94095B371FF02B5400E53570 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94095B361FF02B5400E53570 /* Utilities.swift */; };
-		94095B391FF031AB00E53570 /* Template.txt in Resources */ = {isa = PBXBuildFile; fileRef = 94095B381FF031AB00E53570 /* Template.txt */; };
 		94095B3B1FF072D100E53570 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 94095B3A1FF072D100E53570 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		94095B2B1FEFD1CC00E53570 /* Mask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverController.swift; sourceTree = "<group>"; };
 		94095B361FF02B5400E53570 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		94095B381FF031AB00E53570 /* Template.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Template.txt; sourceTree = "<group>"; };
 		94095B3A1FF072D100E53570 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +75,6 @@
 				94095B251FEFCE0100E53570 /* Info.plist */,
 				94095B2D1FEFD6E600E53570 /* SettingsPopoverController.swift */,
 				94095B361FF02B5400E53570 /* Utilities.swift */,
-				94095B381FF031AB00E53570 /* Template.txt */,
 			);
 			path = "face-mesh";
 			sourceTree = "<group>";
@@ -143,7 +140,6 @@
 			files = (
 				94095B3B1FF072D100E53570 /* README.md in Resources */,
 				94095B1A1FEFCE0100E53570 /* art.scnassets in Resources */,
-				94095B391FF031AB00E53570 /* Template.txt in Resources */,
 				94095B241FEFCE0100E53570 /* LaunchScreen.storyboard in Resources */,
 				94095B211FEFCE0100E53570 /* Assets.xcassets in Resources */,
 				94095B1F1FEFCE0100E53570 /* Main.storyboard in Resources */,

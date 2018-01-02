@@ -10,30 +10,32 @@ import SceneKit
 import ARKit
 
 class Utilities {
-    func exportToCollada(geometry: ARFaceGeometry) -> String {
-        let verticesText = geometry.vertices.map { vertex in String(vertex.x) + " " + String(vertex.y) + " " + String(vertex.z) }.joined(separator: " ")
+    func exportToSTL(geometry: ARFaceGeometry) -> String {
+    
+        var vertexIndex = 0
         
-        var templateText = ""
+        var faces: [[vector_float3]] = [[]]
         
-        let path = Bundle.main.path(forResource: "Template", ofType: "txt")
-        
-        do {
-            try templateText = String(contentsOfFile: path!)
-        } catch  {
-            
+        for i in 0..<geometry.triangleIndices.count {
+            if ((i / 3) != vertexIndex) {
+                faces.append([])
+                vertexIndex = i / 3
+            }
+            faces[vertexIndex].append(geometry.vertices[Int(geometry.triangleIndices[i])])
         }
         
-        templateText = templateText.replacingOccurrences(of: "{{VERTEX_POSITIONS}}", with: verticesText)
-        
-        let date = Date()
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        
-        templateText = templateText.replacingOccurrences(of: "{{DATE}}", with: formatter.string(from: date))
-        
-        return templateText
+        var text = "solid Exported from face-mesh"
+        text += faces.map { v in "\nfacet normal 0 0 0\nouter loop\nvertex \(v[0].x) \(v[0].y) \(v[0].z)\nvertex \(v[1].x) \(v[1].y) \(v[1].z)\nvertex \(v[2].x) \(v[2].y) \(v[2].z)\nendloop\nendfacet" }.joined(separator: "")
+        text += "\nendsolid Exported from face-mesh"
+        return text
+    }
+    
+    func framesToBuffer(frames: [[vector_float3]]) -> Data {
+        var data = Data()
+        for frame in frames {
+            data.append(UnsafeBufferPointer(start: frame, count: frame.count))
+        }
+        return data
     }
 
     func vertices(node:SCNNode) -> [SCNVector3] {
