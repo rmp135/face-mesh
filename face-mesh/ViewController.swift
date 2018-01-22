@@ -145,7 +145,7 @@ class ViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate, UI
     func exportFaceMap() {
         guard let a = session.currentFrame?.anchors[0] as? ARFaceAnchor else { return }
         
-        let toprint = utilities.exportToCollada(geometry: a.geometry)
+        let toprint = utilities.exportToSTL(geometry: a.geometry)
         
         let file = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("face.dae")
         do {
